@@ -110,7 +110,7 @@ function getUsersOnlineMessage(numUsersOnline: number) {
 
 所有值都会被强制转换为 `false`，而其他值则会被强制转换为 `true`。你总是可以通过运行布尔函数或将值置于双否定（double-Boolean negation）中来将值强制转换为布尔值。（后者的优点是，TypeScript 会推断出一种更精确的布尔字面量类型 `true`，而前者则会被推断为 `boolean` 类型。）
 
-> 注意，空数组 `[]` 和 空对象 `{}` 会强制转为 `true`
+!> **译者注：** 注意，空数组 `[]` 和 空对象 `{}` 会强制转为 `true`
 
 ```js
 // both of these result in 'true'
