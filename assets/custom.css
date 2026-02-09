@@ -1,0 +1,125 @@
+/* 基础排版 */
+:root {
+  --base-font-size: 16px;
+  --line-height: 1.7;
+}
+
+.sidebar {
+  width: 240px;
+}
+.sidebar-toggle {
+  width: 240px;
+}
+
+.content {
+  left: 240px;
+  bottom: auto;
+  padding-bottom: 2rem;
+}
+
+.nav {
+  width: var(--toc-width, 280px) !important;
+  margin-top: 1.5rem;
+}
+
+
+.markdown-section {
+  margin: 1rem !important;
+  padding: 1rem !important;
+  max-width: 100%;
+}
+
+.anchor span {
+  color: #23362e;
+  font-weight: bolder;
+}
+
+.sidebar>h1 a {
+  color: #0e1012;
+  font-weight: bolder;
+}
+
+.sidebar ul li a {
+  color: #0e1217;
+}
+
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section ol,
+.markdown-section pre,
+.markdown-section p,
+.markdown-section blockquote,
+.markdown-section ul {
+  margin: 1rem 0;
+}
+
+.markdown-section p {
+  color: #010101;
+}
+
+.markdown-section pre>code {
+  padding: 0.5rem 0;
+}
+
+.sidebar > h1 {
+  text-align: left;
+  padding-left: 0.8em;
+}
+
+.sidebar-nav > ul {
+  padding-left: 0.8em;
+}
+
+/* 内容区最大宽度与间距 */
+.content {
+  padding-top: 0.2rem;
+  padding-bottom: 0.1rem;
+}
+
+.markdown-section pre {
+  border-radius: 6px;
+}
+
+.markdown-section code {
+  border-radius: 4px;
+}
+
+/* 代码高亮 */
+.markdown-section code, .markdown-section pre {
+  background-color: #ecf8ec;
+}
+
+.markdown-section pre>code {
+  color: #000000;
+}
+
+.token.punctuation {
+  color: #ff00a5;
+}
+
+.token.atrule, .token.builtin, .token.important, .token.keyword, .token.selector {
+  color: #000fff;
+}
+
+.token.boolean, .token.function, .token.number {
+  color: #f46300;
+}
+
+.token.attr-value, .token.char, .token.regex, .token.string, .token.variable {
+  color: #b907fd;
+}
+.token.entity, .token.operator, .token.url {
+  color: #090fd9;
+}
+.token.class-name, .token.constant, .token.property, .token.symbol {
+  color: #007e91;
+}
+
+/* 小屏幕下隐藏导航 */
+@media (max-width: 1200px) {
+  .nav {
+    display: none !important;
+  }
+}
+
