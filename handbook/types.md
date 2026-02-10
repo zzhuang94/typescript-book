@@ -203,7 +203,8 @@ printId(101);
 printId("202");
 // Error
 printId({ myID: 22342 });
-// Argument of type '{ myID: number; }' is not assignable to parameter of type 'string | number'.
+// Argument of type '{ myID: number; }' is not assignable
+// to parameter of type 'string | number'.
 ```
 
 联合成员的分隔符可以放在第一个元素之前，因此你也可以这样写：

@@ -19,28 +19,28 @@
 
 .nav {
   width: var(--toc-width, 280px) !important;
-  margin-top: 1.5rem;
+  margin-top: 1rem;
 }
 
 
 .markdown-section {
-  margin: 1rem !important;
+  margin: 0 1rem !important;
   padding: 1rem !important;
   max-width: 100%;
 }
 
 .anchor span {
-  color: #23362e;
+  color: #2c3e50;
   font-weight: bolder;
 }
 
 .sidebar>h1 a {
-  color: #0e1012;
+  color: #2c3e50;
   font-weight: bolder;
 }
 
 .sidebar ul li a {
-  color: #0e1217;
+  color: #476582;
 }
 
 .markdown-section h1,
@@ -55,7 +55,7 @@
 }
 
 .markdown-section p {
-  color: #010101;
+  color: #2c3e50;
 }
 
 .markdown-section pre>code {
@@ -85,35 +85,39 @@
   border-radius: 4px;
 }
 
-/* 代码高亮 */
-.markdown-section code, .markdown-section pre {
-  background-color: #ecf8ec;
+/* 代码高亮：行内 code 浅底，代码块 pre 深色 */
+.markdown-section code {
+  background-color: #e8ecf0;
+  color: #ff0000;
 }
-
-.markdown-section pre>code {
-  color: #000000;
+.markdown-section pre {
+  background-color: #010c05;
+}
+.markdown-section pre > code {
+  background-color: transparent;
+  color: #f3f3f3;
 }
 
 .token.punctuation {
-  color: #ff00a5;
+  color: #ceddff;
 }
 
 .token.atrule, .token.builtin, .token.important, .token.keyword, .token.selector {
-  color: #000fff;
+  color: #f292f4;
 }
 
 .token.boolean, .token.function, .token.number {
-  color: #f46300;
+  color: #ffc27c;
 }
 
 .token.attr-value, .token.char, .token.regex, .token.string, .token.variable {
-  color: #b907fd;
+  color: #99ff99;
 }
 .token.entity, .token.operator, .token.url {
-  color: #090fd9;
+  color: #8ff4ff;
 }
 .token.class-name, .token.constant, .token.property, .token.symbol {
-  color: #007e91;
+  color: #ecff87;
 }
 
 /* 小屏幕下隐藏导航 */
