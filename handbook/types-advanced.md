@@ -1,3 +1,19 @@
+# 从类型创建类型
+
+TypeScript 的类型系统非常强大，因为它允许用其他类型来表达类型。
+
+这个概念最简单的形式就是泛型。此外，我们还有各种各样的类型操作符可供使用。甚至可以用我们已经拥有的值来表达类型。
+
+通过组合各种类型操作符，我们可以用一种简洁、可维护的方式来表达复杂的操作和值。在本节中，我们将介绍如何用现有的类型或值来表达新类型的方法。
+
+*   **泛型** - 带有参数的类型
+*   **Keyof 类型操作符（Keyof Type Operator）** - 使用 `keyof` 操作符创建新类型
+*   **Typeof 类型操作符（Typeof Type Operator）** - 使用 `typeof` 操作符创建新类型
+*   **索引访问类型（Indexed Access Types）** - 使用 `Type['a']` 语法访问类型的子集
+*   **条件类型（Conditional Types）** - 在类型系统中像 if 语句一样起作用的类型
+*   **映射类型（Mapped Types）** - 通过映射现有类型中的每个属性来创建类型
+*   **模板字面量类型（Template Literal Types）** - 通过模板字面量字符串更改属性的映射类型
+
 # 泛型
 
 软件工程的一个主要部分就是构建组件，这些组件不仅要有定义良好且一致的 API，还要具有可复用性。
@@ -347,5 +363,364 @@ const p = create(new HTMLParagraphElement());
 ## 差异注解
 
 > 这是一项用于解决特定问题的高级功能，仅应在确定有必要使用的情况下才可启用。
+
+略...
+
+# keyof 操作符
+
+keyof 运算符接受一个对象类型，并生成其键的字符串或数值字面量联合。以下类型 P 与类型 P = "x" | "y": 相同：
+
+```js
+type Point = { x: number; y: number };
+type P = keyof Point;
+```
+
+如果类型具有字符串或数字索引签名，keyof 将返回这些类型：
+
+```js
+type Arrayish = { [n: number]: unknown };
+type A = keyof Arrayish; // type A = number
+
+type Mapish = { [k: string]: boolean };
+type M = keyof Mapish; // type M = string | number
+```
+
+注意，在这个例子中，M 是字符串或数字类型——这是因为 JavaScript 对象键总是会被强制转换为字符串，所以 obj[0] 始终等同于 obj["0"]。
+
+类型键与映射类型结合使用时尤其有用，我们稍后会详细介绍映射类型。
+
+# typeof 操作符
+
+JavaScript 已经提供了一个 `typeof` 运算符，可以在表达式上下文中使用它：
+
+```js
+// Prints "string"
+console.log(typeof "Hello world");
+```
+
+TypeScript 添加了 `typeof` 运算符，您可以在类型上下文中使用它来引用变量或属性的类型：
+
+```js
+let s = "hello";
+let n: typeof s; // let n: string
+```
+
+对于基本类型来说，这不太实用，但结合其他类型运算符，你可以使用 typeof 方便地表达许多模式。
+
+例如，我们先来看预定义类型 `ReturnType<T>`。它接受一个函数类型并生成其返回类型：
+
+```js
+type Predicate = (x: unknown) => boolean;
+type K = ReturnType<Predicate>;
+// type K = boolean
+```
+
+如果我们尝试在函数名上使用 ReturnType，会看到一个有用的错误信息：
+
+```js
+function f() {
+  return { x: 10, y: 3 };
+}
+type P = ReturnType<f>;
+// 'f' refers to a value, but is being used as a type here. Did you mean 'typeof f'?
+```
+
+请记住，值和类型不是同一回事。要引用值 f 的类型，我们使用 typeof：
+
+```js
+function f() {
+  return { x: 10, y: 3 };
+}
+type P = ReturnType<typeof f>;
+// type P = {
+//     x: number;
+//     y: number;
+// }
+```
+
+## 局限性
+
+TypeScript 有意限制了 `typeof` 可以使用的表达式类型。
+
+具体来说，`typeof` 只能用于标识符（即变量名）或其属性。这有助于避免编写看似正在执行但实际上并未执行的代码，从而避免造成混淆。
+
+```js
+// Meant to use = ReturnType<typeof msgbox>
+let shouldContinue: typeof msgbox("Are you sure you want to continue?");
+// ',' expected.
+```
+
+# 索引访问类型
+
+我们可以使用索引访问类型来查找另一种类型的特定属性：
+
+```js
+type Person = { age: number; name: string; alive: boolean };
+type Age = Person["age"]; // type Age = number
+```
+
+索引类型本身也是一种类型，因此我们可以完全使用联合类型、keyof 类型或其他类型：
+
+```js
+type I1 = Person["age" | "name"];   // type I1 = string | number
+type I2 = Person[keyof Person];     // type I2 = string | number | boolean
+type AliveOrName = "alive" | "name";
+type I3 = Person[AliveOrName];      // type I3 = string | boolean
+```
+
+如果您尝试对不存在的属性进行索引，甚至会看到错误提示：
+
+```js
+type I1 = Person["alve"];
+// Property 'alve' does not exist on type 'Person'.
+```
+
+另一个使用任意类型进行索引的例子是使用 `number` 来获取数组元素的类型。我们可以将其与 `typeof` 结合使用，以便方便地获取数组字面量的元素类型：
+
+```js
+const MyArray = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 23 },
+  { name: "Eve", age: 38 },
+];
+
+type Person = typeof MyArray[number];
+// type Person = {
+//     name: string;
+//     age: number;
+// }
+
+type Age = typeof MyArray[number]["age"];
+// type Age = number
+
+type Age2 = Person["age"];
+// type Age2 = number
+```
+
+索引时只能使用类型，这意味着不能使用 const 来引用变量：
+
+```js
+const key = "age";
+type Age = Person[key];
+// Type 'key' cannot be used as an index type.
+// 'key' refers to a value, but is being used as a type here. Did you mean 'typeof key'?
+```
+
+不过，您可以使用类型别名来实现类似的重构方式：
+
+```js
+type key = "age";
+type Age = Person[key];
+```
+
+# 条件类型
+
+大多数实用程序的核心在于根据输入做出决策。
+JavaScript 程序也不例外，但由于值很容易被内省，这些决策也取决于输入的类型。
+条件类型有助于描述输入和输出类型之间的关系。
+
+```js
+interface Animal {
+  live(): void;
+}
+interface Dog extends Animal {
+  woof(): void;
+}
+type Example1 = Dog extends Animal ? number : string;
+// type Example1 = number
+type Example2 = RegExp extends Animal ? number : string;
+// type Example2 = string
+```
+
+条件类型的形式与 JavaScript 中的条件表达式（条件 ? true 表达式 : false 表达式）有些类似：
+
+```js
+SomeType extends OtherType ? TrueType : FalseType;
+```
+
+当继承关系左侧的类型可以赋值给右侧的类型时，你会得到第一个分支（“真”分支）中的类型；否则，你会得到第二个分支（“假”分支）中的类型。
+
+从上面的例子中，条件类型可能看起来并不那么实用——我们可以判断 Dog 是否继承自 Animal，然后选择数字或字符串！但条件类型的强大之处在于它们与泛型结合使用。
+
+例如，我们来看下面的 createLabel 函数：
+
+```js
+interface IdLabel {
+  id: number /* some fields */;
+}
+interface NameLabel {
+  name: string /* other fields */;
+}
+function createLabel(id: number): IdLabel;
+function createLabel(name: string): NameLabel;
+function createLabel(nameOrId: string | number): IdLabel | NameLabel;
+function createLabel(nameOrId: string | number): IdLabel | NameLabel {
+  throw "unimplemented";
+}
+```
+
+这些 `createLabel` 的重载描述了一个 JavaScript 函数，它会根据输入的类型做出选择。请注意以下几点：
+
+1. 如果一个库需要在其 API 中反复做出相同的选择，这将变得非常繁琐。
+2. 我们需要创建三个重载：一个用于确定类型的情况（一个用于字符串，一个用于数字），一个用于最通用的情况（接受字符串或数字）。对于 `createLabel` 可以处理的每种新类型，重载的数量都会呈指数级增长。
+
+相反，我们可以将这种逻辑编码到条件类型中：
+
+```js
+type NameOrId<T extends number | string> = T extends number ? IdLabel : NameLabel;
+```
+
+然后，我们可以利用这种条件类型，将重载函数简化为一个没有重载的单一函数。
+
+```js
+function createLabel<T extends number | string>(idOrName: T): NameOrId<T> {
+  throw "unimplemented";
+}
+let a = createLabel("typescript");  // let a: NameLabel
+let b = createLabel(2.8);           // let b: IdLabel
+let c = createLabel(Math.random() ? "hello" : 42);  // let c: NameLabel | IdLabel
+```
+
+## 条件类型约束
+
+通常，条件类型中的检查会为我们提供一些新的信息。就像使用类型守卫进行类型缩小可以提供更具体的类型一样，条件类型的真分支会根据我们检查的类型进一步约束泛型。
+
+例如，我们来看以下代码：
+
+```js
+type MessageOf<T> = T["message"];
+// Type '"message"' cannot be used to index type 'T'.
+```
+
+在这个例子中，TypeScript 报错是因为类型 T 不存在名为 message 的属性。我们可以对类型 T 进行约束，TypeScript 就不会再报错了：
+
+```js
+type MessageOf<T extends { message: unknown }> = T["message"];
+interface Email {
+  message: string;
+}
+type EmailMessageContents = MessageOf<Email>;
+// type EmailMessageContents = string
+```
+
+但是，如果我们希望 MessageOf 接受任何类型，并且在消息属性不可用时默认返回“不返回”之类的值，该怎么办呢？
+我们可以通过将约束条件移出并引入条件类型来实现这一点：
+
+```js
+type MessageOf<T> = T extends { message: unknown } ? T["message"] : never;
+
+interface Email {
+  message: string;
+}
+
+interface Dog {
+  bark(): void;
+}
+
+type EmailMessageContents = MessageOf<Email>;   // type EmailMessageContents = string
+type DogMessageContents = MessageOf<Dog>;       // type DogMessageContents = never
+```
+
+在 true 分支中，TypeScript 知道 T 将具有 message 属性。
+
+再举一个例子，我们还可以编写一个名为 Flatten 的类型，它将数组类型展平为其元素类型，但其他方面保持不变：
+
+```js
+type Flatten<T> = T extends any[] ? T[number] : T;
+ 
+// Extracts out the element type.
+type Str = Flatten<string[]>; // type Str = string
+
+// Leaves the type alone.
+type Num = Flatten<number>; // type Num = number
+```
+
+当 Flatten 接收数组类型作为参数时，它会使用索引访问字符串数组 `string[]` 的元素类型。否则，它直接返回接收的类型。
+
+## 条件类型推理
+
+我们发现自己经常使用条件类型来应用约束，然后提取类型。这种操作非常常见，条件类型让一切变得更加便捷。
+
+条件类型提供了一种方法，让我们能够使用 `infer` 关键字从 `true` 分支中比较的类型进行推断。
+
+例如，我们可以推断 `Flatten` 中的元素类型，而无需使用索引访问类型“手动”获取：
+
+```js
+type Flatten<Type> = Type extends Array<infer Item> ? Item : Type;
+```
+
+这里，我们使用 `infer` 关键字声明式地引入了一个名为 `Item` 的新泛型类型变量，而不是在 `true` 分支中指定如何获取 `Type` 的元素类型。这使我们无需考虑如何深入挖掘和解析我们感兴趣的类型的结构。
+
+我们可以使用 `infer` 关键字编写一些有用的辅助类型别名。
+例如，对于简单的情况，我们可以从函数类型中提取返回类型：
+
+```js
+type GetReturnType<Type> = Type extends (...args: never[]) => infer Return ? Return : never; 
+
+type Num = GetReturnType<() => number>;             // type Num = number
+type Str = GetReturnType<(x: string) => string>;    // type Str = string
+type Bools = GetReturnType<(a: boolean, b: boolean) => boolean[]>; // type Bools = boolean[]
+```
+
+当从具有多个调用签名的类型（例如重载函数的类型）进行类型推断时，推断基于最后一个签名（这通常是最宽松的兜底情况）。无法基于参数类型列表执行重载解析。
+
+```js
+declare function stringOrNum(x: string): number;
+declare function stringOrNum(x: number): string;
+declare function stringOrNum(x: string | number): string | number;
+ 
+type T1 = ReturnType<typeof stringOrNum>; // type T1 = string | number
+```
+
+## 分布式条件类型
+
+当条件类型作用于泛型类型时，如果给定的是一个联合类型，则它们就具有分配律。例如，考虑以下情况：
+
+```js
+type ToArray<Type> = Type extends any ? Type[] : never;
+```
+
+如果我们将联合类型插入到 ToArray 中，那么条件类型将应用于该联合体的每个成员。
+
+```js
+type ToArray<Type> = Type extends any ? Type[] : never;
+ 
+type StrArrOrNumArr = ToArray<string | number>;
+// type StrArrOrNumArr = string[] | number[]
+```
+
+这里发生的情况是，ToArray 函数会按以下方式分发：
+
+```js
+string | number;
+```
+
+联合类型中的每个成员都会执行映射：
+
+```js
+ToArray<string> | ToArray<number>;
+```
+
+于是我们得到了：
+
+```js
+string[] | number[];
+```
+
+通常情况下，分布式特性是理想的行为。为了避免这种特性，你可以用方括号将 `extends` 关键字的每一侧括起来。
+
+```js
+type ToArrayNonDist<Type> = [Type] extends [any] ? Type[] : never;
+ 
+// 'ArrOfStrOrNum' is no longer a union.
+type ArrOfStrOrNum = ToArrayNonDist<string | number>;
+// type ArrOfStrOrNum = (string | number)[]
+```
+
+# 映射类型
+
+略...
+
+# 模板字面类型
 
 略...

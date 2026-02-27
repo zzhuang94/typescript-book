@@ -12,11 +12,8 @@
   - [类型收窄](handbook/narrowing.md)
   - [函数进阶](handbook/function.md)
   - [对象类型](handbook/object.md)
-  
-  - 类型进阶
-
-    - [总览](handbook/types/nav.md)
-    - [泛型](handbook/types/generics.md)
+  - [类型进阶](handbook/types-advanced.md)
+  - [面向对象：类](handbook/classes.md)
 
 - 参考
 
