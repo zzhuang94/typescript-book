@@ -36,15 +36,15 @@ function greet(person: Person) {
 
 在以上三个例子中，我们都编写了函数，这些函数接受包含属性名称（必须是字符串）和年龄（必须是数字）的对象。
 
-## 快速参考
+# 快速参考
 
 我们提供了 `type` 和 `interface` 的 [速查表](https://www.typescriptlang.org/cheatsheets/)，如果您想快速了解重要的日常语法，可以一目了然地查阅。
 
-## 属性修饰符
+# 属性修饰符
 
 对象类型中的每个属性都可以指定：类型、属性是否可选以及属性是否可写。
 
-### 可选属性
+## 可选属性
 
 很多时候，我们会遇到一些对象，它们可能具有一组属性。在这种情况下，我们可以通过在属性名称末尾添加问号（?）来将这些属性标记为可选。
 
@@ -100,7 +100,7 @@ function paintShape({ shape, xPos = 0, yPos = 0 }: PaintOptions) {
 这里我们对 paintShape 的参数使用了解构模式，并为 xPos 和 yPos 提供了默认值。
 现在，xPos 和 yPos 都明确存在于 paintShape 函数体中，但对于 paintShape 的任何调用者来说，它们是可选的。
 
-### 只读属性
+## 只读属性
 
 在 TypeScript 中，属性也可以标记为只读。虽然这不会改变运行时行为，但标记为只读的属性在类型检查期间无法写入。
 
@@ -176,7 +176,7 @@ console.log(readonlyPerson.age); // prints '43'
 
 使用 [映射修饰符](xxx)，可以移除只读属性。
 
-### 索引签名
+## 索引签名
 
 有时你无法预先知道某个类型所有属性的名称，但你知道其值的格式。
 
@@ -231,7 +231,7 @@ myArray[2] = "Mallory";
 
 您无法设置 myArray[2]，因为索引签名是只读的。
 
-## 额外属性检查
+# 额外属性检查
 
 对象被赋予类型的位置和方式会对类型系统产生影响。一个关键的例子是额外的属性检查，它会在创建对象并将其分配给对象类型时，对对象进行更彻底的验证。
 
@@ -296,7 +296,7 @@ let mySquare = createSquare(squareOptions);
 
 这意味着，如果您在处理类似选项包之类的东西时遇到属性过多检查的问题，您可能需要修改一些类型声明。在这种情况下，如果允许将同时包含 color 或 colour 属性的对象传递给 createSquare，则应该修改 SquareConfig 的定义以反映这一点。
 
-## 接口扩展
+# 接口扩展
 
 有些类型是其他类型的更具体版本，这种情况很常见。例如，我们可能有一个名为 BasicAddress 的类型，它描述了一个地址所需的字段。
 
@@ -360,7 +360,7 @@ const cc: ColorfulCircle = {
 };
 ```
 
-## 接口交集
+# 接口交集
 
 接口允许我们通过扩展现有类型来构建新的类型。TypeScript 还提供了另一种称为交集类型的构造，主要用于组合现有的对象类型。
 
@@ -379,7 +379,7 @@ type ColorfulCircle = Colorful & Circle;
 
 在这里，我们将 `Colorful` 和 `Circle` 进行交集运算，从而生成了一个新类型，该类型拥有 `Colorful` 和 `Circle` 的所有成员。
 
-## 接口扩展 vs. 接口交集
+# 接口扩展 vs. 接口交集
 
 我们刚刚看到了两种组合类型的方法，它们看起来很相似，但实际上有细微的差别。
 使用 `interface`，我们可以使用 `extends` 子句来扩展其他类型，而我们也可以使用交叉类型做类似的事情，并使用类型别名来命名结果。
@@ -416,7 +416,7 @@ staffer.name; // never
 
 在这种情况下，`Staff` 将要求 `name` 属性既是 `string` 又是 `number`，这导致该属性的类型变为 `never`。
 
-## 泛型对象类型
+# 泛型对象类型
 
 让我们想象一个 `Box` 类型，它可以包含任何值——`string`、`number`、`Giraffe` 等等。
 
@@ -545,7 +545,7 @@ type OneOrManyOrNullStrings = OneOrManyOrNull<string>;
 
 我们稍后会回过头来再讲类型别名。
 
-### Array
+## Array
 
 泛型对象类型通常是某种容器类型，它们独立于所包含元素的类型而工作。数据结构以这种方式工作是非常理想的，这样它们就可以在不同的数据类型之间重用。
 
@@ -586,7 +586,7 @@ interface Array<Type> {
 
 现代 JavaScript 还提供了其他泛型数据结构，比如 `Map<K, V>`、`Set<T>` 和 `Promise<T>`。这实际上意味着，由于 `Map`、`Set` 和 `Promise` 的行为方式，它们可以与任何类型集合一起工作。
 
-### ReadonlyArray
+## ReadonlyArray
 
 `ReadonlyArray` 是一个特殊类型，用于描述不应该被更改的数组。
 
@@ -642,7 +642,7 @@ y = x;
 // The type 'readonly string[]' is 'readonly' and cannot be assigned to the mutable type 'string[]'.
 ```
 
-### Tuple
+## Tuple
 
 元组类型是另一种数组类型，它确切地知道自己包含多少个元素，以及在特定位置包含确切的什么类型。
 
@@ -753,7 +753,7 @@ function readButtonInput(name: string, version: number, ...input: boolean[]) {
 当你想要使用剩余参数来接收可变数量的参数，并且需要保证最少元素个数，但又不想引入中间变量时，这就非常方便了。
 
 
-### readonly Tuple
+## readonly Tuple
 
 关于元组类型最后要注意的一点是——元组类型也有 `readonly`（只读）变体，并且可以通过在它们前面加上 `readonly` 修饰符来指定——就像数组的简写语法一样。
 

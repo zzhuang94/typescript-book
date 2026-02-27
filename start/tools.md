@@ -2,13 +2,13 @@
 
 让我们从使用TypeScript构建一个简单的Web应用程序开始。
 
-## 安装 TypeScript
+# 安装 TypeScript
 
 ```shell
 npm install -g typescript
 ```
 
-## 创建 TypeScript 文件
+# 创建 TypeScript 文件
 
 在你的编辑器中，在greeter.ts中输入以下JavaScript代码：
 
@@ -22,7 +22,7 @@ let user = "Jane User";
 document.body.textContent = greeter(user);
 ```
 
-## 编译代码
+# 编译代码
 
 我们使用了.ts扩展名，但这段代码只是JavaScript。你本可以直接从现有的JavaScript应用中复制粘贴这段代码。
 
@@ -46,7 +46,7 @@ let user = "Jane User";
 document.body.textContent = greeter(user);
 ```
 
-## 类型注解
+# 类型注解
 
 在TypeScript中，类型标注是一种轻量级的方法，用于记录函数或变量的预期契约。在本例中，我们希望greeter函数能够接受一个字符串参数。我们可以尝试将调用greeter改为传递一个数组：
 
@@ -69,7 +69,7 @@ document.body.textContent = greeter(user);
 
 请注意，尽管存在错误，greeter.js文件仍然被创建了。即使代码中有错误，你也可以使用TypeScript。但在这种情况下，TypeScript会警告你的代码可能无法按预期运行。
 
-## 接口
+# 接口
 
 让我们进一步开发我们的示例。这里我们使用一个接口来描述具有 firstName 和 lastName 字段的对象。
 在TypeScript中，如果两个类型的内部结构兼容，那么它们就是兼容的。这使我们只需拥有接口所需的形状，就可以实现接口，而无需显式的 `implements` 子句。
@@ -89,7 +89,7 @@ let user = { firstName: "Jane", lastName: "User" };
 document.body.textContent = greeter(user);
 ```
 
-## 类
+# 类
 
 最后，让我们最后一次用类来扩展这个示例。TypeScript支持JavaScript中的新特性，比如支持基于类的面向对象编程。
 
@@ -125,7 +125,7 @@ document.body.textContent = greeter(user);
 
 重新运行tsc greeter.ts，你会看到生成的JavaScript与之前的代码相同。TypeScript中的类只是基于原型面向对象（OO）的简写，这种面向对象在JavaScript中经常使用。
 
-## 运行 TypeScript
+# 运行 TypeScript
 
 创建 `greeter.html`
 

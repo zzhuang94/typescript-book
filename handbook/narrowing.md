@@ -46,7 +46,7 @@ function padLeft(padding: number | string, input: string): string {
 
 TypeScript支持几种不同的构造来进行类型收窄。
 
-## typeof 校验
+# typeof 校验
 
 如我们所知，JavaScript支持一个 `typeof` 操作符，该操作符可以在运行时提供关于值类型的非常基本的信息。TypeScript期望该操作符返回一组特定的字符串：
 
@@ -84,7 +84,7 @@ function printAll(strs: string | string[] | null) {
 
 这或许是一个很好的过渡，引入我们所说的“真实性”检查。
 
-## 真值检查
+# 真值检查
 
 `Truthiness` 真值————这个词可能不会出现在字典里，但你肯定会在JavaScript中听到它。
 
@@ -173,7 +173,7 @@ function multiplyAll(
 }
 ```
 
-## 等值校验
+# 等值校验
 
 TypeScript 还使用 switch 语句和等式检查（如 ===、!==、== 和 !=）来缩小类型范围。例如：
 
@@ -225,7 +225,7 @@ function multiplyValue(container: Container, factor: number) {
 }
 ```
 
-## in 校验
+# in 校验
 
 JavaScript 有一个运算符用于判断一个对象或其原型链中是否存在具有特定名称的属性：即 in 运算符。TypeScript 将此作为缩小潜在类型范围的一种方法加以考虑。
 
@@ -259,7 +259,7 @@ function move(animal: Fish | Bird | Human) {
 }
 ```
 
-## instanceof 校验
+# instanceof 校验
 
 JavaScript 有一个运算符用于检查一个值是否是另一个值的“实例”。更具体地说，在 JavaScript 中，x instanceof Foo 会检查 x 的原型链是否包含 Foo.prototype。虽然我们在这里不会深入探讨，而且当我们进入类的话题时，你会看到更多相关内容，但对于大多数可以通过 new 构造的值来说，它们仍然很有用。你可能已经猜到了，instanceof 也是一种类型保护机制，而 TypeScript 会在由 instanceof 保护的分支中进行类型收窄。
 
@@ -273,7 +273,7 @@ function logValue(x: Date | string) {
 }
 ```
 
-## 赋值
+# 赋值
 
 正如我们之前提到的，当我们给任何变量赋值时，TypeScript会查看赋值语句的右侧，并相应地缩小左侧变量的类型范围。
 

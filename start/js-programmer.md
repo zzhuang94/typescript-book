@@ -8,7 +8,7 @@ TypeScript 与 JavaScript 有着不同寻常的关系。TypeScript 提供了 Jav
 
 本教程提供 TypeScript 的简要概述，重点介绍其类型系统。
 
-## 类型推断
+# 类型推断
 
 TypeScript 可以识别 JavaScript 语言，在许多情况下可以推断类型。例如，在创建变量并将其赋值给特定值时， TypeScript 将使用该值作为其类型。
 
@@ -20,7 +20,7 @@ let helloWorld = "Hello World";
 
 你可能已经在 Visual Studio Code 中编写了 JavaScript，并已使用了编辑器的自动补全功能。Visual Studio Code 使用了 TypeScript 的引擎，以便更容易地处理 JavaScript。
 
-## 类型定义
+# 类型定义
 
 你可以在 JavaScript 中使用各种各样的设计模式。然而，某些设计模式使得类型难以自动推断（例如，使用动态编程的模式）。为了使类型推断涵盖这些情况， TypeScript 支持扩展 JavaScript 语言，它可以让 TypeScript 知道如何去推断类型。
 
@@ -108,11 +108,11 @@ JavaScript 中已经有一些基本类型可用：`boolean`、 `bigint`、 `null
 
 构建类型有两种语法： 接口和类型。 你应该更喜欢 `interface`。当需要特定功能时使用 `type` 。
 
-## 类型组合
+# 类型组合
 
 使用 TypeScript，可以通过组合简单类型来创建复杂类型。有两种流行的方法可以做到这一点：联合和泛型。
 
-### 联合
+## 联合
 
 使用联合，可以声明类型可以是许多类型中的一种。例如，可以将 `boolean` 类型描述为 `true` 或 `false` ：
 
@@ -160,7 +160,7 @@ function wrapInArray(obj: string | string[]) {
 }
 ```
 
-### 泛型
+## 泛型
 
 泛型为类型提供变量。一个常见的例子是数组。没有泛型的数组可以包含任何内容。带有泛型的数组可以描述数组包含的值。
 
@@ -189,7 +189,7 @@ const object = backpack.get();
 backpack.add(23);
 ```
 
-## 类型系统
+# 类型系统
 
 TypeScript 的一个核心原则是类型检查基于对象的属性和行为（*type checking focuses on the shape that values have*）。这有时被叫做 *鸭子类型* 或 *结构类型*（`structural typing`）。
 

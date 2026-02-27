@@ -4,7 +4,7 @@
 
 你可能已经听说，TypeScript 是 JavaScript 的一种“变体”或“版本”。TypeScript（TS）和JavaScript（JS）之间的关系在现代编程语言中相当独特，因此，深入了解这种关系将有助于你理解TypeScript是如何为JavaScript增色的。
 
-## JavaScript 简史
+# JavaScript 简史
 
 JavaScript（亦称ECMAScript）最初是为浏览器开发的一种简单脚本语言。在其诞生之初，人们期望它被用于嵌入网页中的简短代码片段——编写超过几十行的代码在当时显得有些不同寻常。正因如此，早期的网页浏览器执行此类代码的速度相当缓慢。然而，随着时间的推移，JavaScript变得越来越流行，网页开发者开始利用它来创造交互式体验。
 
@@ -35,7 +35,7 @@ const area = obj.width * obj.heigth;
 
 当这类错误发生时，大多数编程语言都会报错，有些会在编译阶段——即在任何代码运行之前——报错。在编写小程序时，这种小问题虽然令人烦恼，但尚在可控范围内；但在编写包含数百或数千行代码的应用程序时，这些不断出现的意外就成了一个严重的问题。
 
-## TypeScript：静态类型检查工具
+# TypeScript：静态类型检查工具
 
 我们之前提到过，有些语言根本不允许运行那些有漏洞的程序。在不运行代码的情况下检测其中的错误，这被称为静态检查。根据操作值的类型来判断哪些是错误、哪些不是，这被称为静态类型检查。
 
@@ -51,7 +51,7 @@ const area = obj.width * obj.heigth;
 JavaScript的类型化超集
 那么，TypeScript与JavaScript有什么关系呢？
 
-### 语法
+## 语法
 
 TypeScript是一种语言，它是JavaScript的超集：因此，JavaScript语法也是合法的TypeScript语法。语法是指我们编写文本以形成程序的方式。例如，这段代码有一个语法错误，因为它缺少一个冒号：
 ```js
@@ -61,7 +61,7 @@ let a = (4
 
 由于TypeScript的语法特性，它不会将任何JavaScript代码视为错误。这意味着你可以将任何可运行的JavaScript代码放入TypeScript文件中，而无需担心其具体编写方式。
 
-### 类型
+## 类型
 
 然而，TypeScript是一个类型化的超集，这意味着它增加了关于如何使用不同类型值的规则。之前关于obj.heigth的错误不是语法错误：而是以错误的方式使用了某种类型的值（即类型错误）。
 
@@ -79,7 +79,7 @@ console.log(4 / []);
 
 如果你将一些代码从JavaScript文件移到TypeScript文件中，根据代码的编写方式，你可能会看到类型错误。这些错误可能是代码本身的问题，也可能是TypeScript过于保守造成的。在本指南中，我们将演示如何添加各种TypeScript语法来消除这些错误。
 
-### 运行时行为
+## 运行时行为
 
 TypeScript也是一种保留JavaScript运行时行为的编程语言。例如，在JavaScript中，除以零会得到 `Infinity`，而不是抛出运行时异常。作为一项原则，**TypeScript永远不会改变JavaScript代码的运行时行为。**
 
@@ -87,7 +87,7 @@ TypeScript也是一种保留JavaScript运行时行为的编程语言。例如，
 
 保持与JavaScript相同的运行时行为是TypeScript的基本承诺，因为这意味着你可以轻松地在两种语言之间切换，而不必担心那些可能导致程序停止运行的细微差异。
 
-### 擦除类型
+## 擦除类型
 
 粗略地说，一旦 TypeScript 的编译器完成了检查代码的工作，它就会 擦除 类型以生成最终的“已编译”代码。这意味着一旦您的代码被编译，生成的普通 JS 代码便没有类型信息。
 
@@ -95,7 +95,7 @@ TypeScript也是一种保留JavaScript运行时行为的编程语言。例如，
 
 最后，TypeScript 不提供任何额外运行时库。你的程序会使用与 JavaScript 程序相同的标准库（或外部库）。因此你不需要学习其他专属于 TypeScript 的框架。
 
-## 学习 JavaScript 和 TypeScript
+# 学习 JavaScript 还是 TypeScript
 
 我们经常看到这样的问题：“我该学习 JavaScript 还是 TypeScript？”。
 
