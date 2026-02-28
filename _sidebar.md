@@ -14,6 +14,7 @@
   - [对象类型](handbook/object.md)
   - [类型进阶](handbook/types-advanced.md)
   - [面向对象：类](handbook/classes.md)
+  - [模块](handbook/modules.md)
 
 - 参考
 
