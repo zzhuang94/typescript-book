@@ -7,3 +7,5 @@
 部署到 [github pages](https://github.com/zzhuang94/typescript-book)
 
 推荐阅读地址 [https://zzhuang94.github.io/typescript-book](https://zzhuang94.github.io/typescript-book)
+
+如果对您有帮助，请给一个小星星 [✨ github](https://github.com/zzhuang94/typescript-book)

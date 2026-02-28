@@ -18,6 +18,9 @@
 
 - 参考
 
+  - [公共类型](ref/utility-types.md)
+  - [装饰器](ref/decorators.md)
+  - [声明合并](ref/declaration-merging.md)
   - [更多资源](ref/links.md)
 
 - [关于本文档](/)
