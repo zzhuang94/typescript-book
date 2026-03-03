@@ -21,6 +21,16 @@
   - [公共类型](ref/utility-types.md)
   - [装饰器](ref/decorators.md)
   - [声明合并](ref/declaration-merging.md)
+  - [枚举](ref/enums.md)
+  - [迭代器和生成器](ref/iterators-and-generators.md)
+  - [JSX](ref/jsx.md)
+  - [Mixin](ref/mixins.md)
+  - [类型兼容](ref/type-compatibility.md)
+  - [变量声明](ref/variable-declaration.md)
   - [更多资源](ref/links.md)
+
+- 译者笔记
+
+  - [类型/类/接口](note/type-class-interface.md)
 
 - [关于本文档](/)
