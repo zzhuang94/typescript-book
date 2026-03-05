@@ -33,4 +33,8 @@
 
   - [类型/类/接口](note/type-class-interface.md)
 
+- Vue 实战
+
+  - [Props 默认值](vue/props.md)
+
 - [关于本文档](/)
