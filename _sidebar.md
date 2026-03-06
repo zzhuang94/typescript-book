@@ -36,5 +36,10 @@
 - Vue 实战
 
   - [Props 默认值](vue/props.md)
+  - [事件与 v-model 类型安全](vue/emits.md)
+  - [Slots 与插槽参数类型](vue/slots.md)
+  - [模板 ref 与组件实例](vue/template-ref.md)
+  - [组合函数与 TypeScript 泛型](vue/composables-ts.md)
+  - [defineExpose 与跨组件访问](vue/expose.md)
 
 - [关于本文档](/)
