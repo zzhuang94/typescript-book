@@ -1,15 +1,9 @@
-% defineExpose 与跨组件访问
+# defineExpose 与跨组件访问
 
-# defineExpose 是做什么的
+## 基础知识
 
-在 `<script setup>` 中，组件内部的变量、函数默认是**不会暴露给父组件**的。
-
-如果你需要让父组件通过 `ref` 访问某些方法或状态，就需要用 `defineExpose` 明确声明：**这就是我愿意暴露给外部的 API**。
-
-配合 TypeScript 后：
-
-- 暴露给外部的属性会有完整的类型提示。
-- 父组件无法访问未暴露的内部实现细节，从而保持组件边界清晰。
+- 子组件内部的变量、函数默认是 *不会暴露给父组件的*
+- 如果想让父组件访问子组件的变量或方法，子组件就需要用 `defineExpose` 明确声明：*这就是我愿意暴露给外部的 API*。
 
 # 基础用法
 
@@ -81,8 +75,6 @@ function open() {
 }
 </script>
 ```
-
-要点：
 
 - 子组件只暴露 `show`、`hide` 两个方法。
 - 父组件通过 `InstanceType<typeof DialogPanel>` 获取实例类型后：
