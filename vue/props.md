@@ -243,3 +243,13 @@ const { msg = 'hello', labels = ['one', 'two'] } = defineProps<Props>()
   - `适用场景`：仅当明确不需要响应式更新（例如只在 setup 初始化时使用一次），或者配合 toRefs 恢复响应性时使用。直接解构并用于模板是不安全的。
 
 !> 强烈推荐使用第一种 `withDefaults` 写法，它不仅保持了 props 的响应性，还通过规范化的默认值处理（尤其是对象/数组）和增强的类型推导，使代码更健壮、更可维护。解构赋值的写法虽简洁，但因其破坏响应性，应谨慎使用，仅限于明确不需要响应式更新的场景
+
+# gin-vue-web 对照示例
+
+想看一个中后台项目里的真实写法，可以结合 `gin-vue-web` 阅读这些位置：
+
+- `frontend/src/components/`：查看业务组件如何接收 props，重点关注字段是否可选、是否需要默认值。
+- `frontend/src/templates/index.vue`：观察模板组件如何把配置/数据通过 props 传给子组件（搜索、表格、分页等）。
+- `frontend/src/modules/`：按页面找组件调用方，确认父组件传参和子组件声明是否一致。
+
+推荐做法是：先在页面里找到组件调用，再跳到组件定义处核对 `defineProps` / `withDefaults`，最后回到页面确认传参是否满足类型约束。

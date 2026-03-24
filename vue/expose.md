@@ -201,3 +201,13 @@ function handleClick() {
 - 配合 `ref<InstanceType<typeof Child> | null>` 或显式接口类型，可以在 TypeScript 中获得完整的跨组件调用提示。
 - 合理使用 `defineExpose` 能将复杂的 UI/业务封装成一组清晰的“方法接口”，在重构和多人协作时显著提升可靠性；而在 JavaScript 中，这些接口往往以“约定俗成”的形式存在，缺乏编译期保障。
 
+# gin-vue-web 对照示例
+
+如果你想看“父组件控制子组件”的工程化落地，建议在 `gin-vue-web` 里按下面方式找案例：
+
+- 优先查看 `frontend/src/components/` 中的弹窗/编辑类组件，关注是否对外暴露 `open/close/reset/submit` 这类方法。
+- 再查看 `frontend/src/modules/` 中的页面组件，观察父组件如何通过 `ref` 调用子组件对外 API。
+- 结合 `frontend/src/templates/index.vue`，理解页面层如何统一组织组件交互。
+
+可以把本文的检查清单直接套进去：是否只暴露必要 API、是否有清晰类型、是否避免把内部状态全部暴露出去。
+

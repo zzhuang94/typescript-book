@@ -219,3 +219,13 @@ defineEmits<{
 ```
 
 > 两种写法在类型检查和运行时行为上一致，按团队习惯选用即可。
+
+# gin-vue-web 对照示例
+
+在 `gin-vue-web` 里可以重点看这几类文件来理解“父子同步”的实战模式：
+
+- `frontend/src/templates/index.vue`：列表页模板作为“父级容器”，向子组件传入状态和回调。
+- `frontend/src/components/edit.vue`：表单类组件常见 `props + emit` 协作场景，可对照本文的单向数据流思路。
+- `frontend/src/components/` 下的表格/搜索相关组件：观察父组件如何下发值，子组件如何通过事件回传交互结果。
+
+阅读顺序建议：先看模板如何组织状态，再看具体组件如何声明 `props`/`emits`，最后回到页面确认事件回流是否闭环。

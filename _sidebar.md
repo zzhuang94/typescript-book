@@ -32,11 +32,14 @@
 - 个人笔记
 
   - [类型/类/接口](note/type-class-interface.md)
+  - [特殊符号](note/special-symbols.md)
 
 - Vue 实战
 
+  - [开源项目推荐](vue/gin-vue-web.md)
   - [Props 默认值](vue/props.md)
   - [数据同步](vue/sync.md)
   - [defineExpose](vue/expose.md)
+  - [组合式函数](vue/composables.md)
 
 - [关于本文档](/)
